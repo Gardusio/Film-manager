@@ -13,9 +13,9 @@ pids
 *.seed
 *.pid.lock
 
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-
+*.db-shm
+*.db-wal
+.vs/
 # Dependency directories
 node_modules/
 
