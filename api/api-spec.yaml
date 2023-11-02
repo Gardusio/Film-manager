@@ -50,7 +50,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./schemas/dtos/auth/LoginUnauthorizedResponse.json"
+                $ref: "./schemas/dtos/auth/BaseError.json"
         "400":
           description: Missing credentials
           content:
