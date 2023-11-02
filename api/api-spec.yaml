@@ -1,0 +1,59 @@
+openapi: 3.0.0
+
+servers:
+  - description: Film manager backend service
+    url: http://localhost:8080/api/
+
+info:
+  description: Film Manager - Rest API - Distributed Sys
+  version: "0.0.0"
+  title: Film Manager API
+  contact:
+    email: s317783@studenti.polito.it
+
+tags:
+  - name: auth
+    description: Routes to handle authentication and authorization
+  - name: user
+    description: Routes to handle user operations
+  - name: film
+    description: Routes to handle films operations
+  - name: review
+    description: Routes to handle review operations
+
+paths:
+  /auth/login:
+    post:
+      summary: Log in a user
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: User email
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Login Successful
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/users/UserResponse.json"
+        "401":
+          description: Wrong credentials
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/auth/LoginUnauthorizedResponse.json"
+        "400":
+          description: Missing credentials
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/auth/LoginBadCredentialsResponse.json"
