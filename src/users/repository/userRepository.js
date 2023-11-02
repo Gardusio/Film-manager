@@ -1,5 +1,5 @@
 import { db } from "../../../server.js";
-import bcrypt from 'bcryptjs'
+import { DBError } from "../../errors/dbErrors.js";
 import { selectByEmail, selectById } from "./queries.js";
 
 
@@ -7,13 +7,11 @@ const findById = (id) => {
     return new Promise((resolve, reject) => {
         db.get(selectById, [id], (err, row) => {
             if (err)
-                reject(err);
+                reject(new DBError(err.message));
             else if (row === undefined)
-                resolve({ error: 'User not found.' });
+                resolve(false);
             else {
-                // By default, the local strategy looks for "username": 
-                // for simplicity, instead of using "email", we create an object with that property.
-                const user = { id: row.id, email: row.email, name: row.name }
+                const user = { id: row.id, email: row.email, name: row.name, password: row.hash }
                 resolve(user);
             }
         });
@@ -24,7 +22,7 @@ const findByEmail = (email) => {
     return new Promise((resolve, reject) => {
         db.get(selectByEmail, [email], (err, row) => {
             if (err) {
-                reject(err);
+                reject(new DBError());
             } else if (row === undefined) {
                 resolve(false);
             }
