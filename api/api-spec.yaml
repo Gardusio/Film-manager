@@ -14,11 +14,11 @@ info:
 tags:
   - name: auth
     description: Routes to handle authentication and authorization
-  - name: user
+  - name: users
     description: Routes to handle user operations
-  - name: film
+  - name: films
     description: Routes to handle films operations
-  - name: review
+  - name: reviews
     description: Routes to handle review operations
 
 paths:
@@ -31,13 +31,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                  description: User email
-                password:
-                  type: string
+              $ref: "./schemas/dtos/auth/LoginRequest.json"
       responses:
         "200":
           description: Login Successful
@@ -50,10 +44,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./schemas/dtos/auth/BaseError.json"
+                $ref: "./schemas/dtos/errors/BaseError.json"
         "400":
           description: Missing credentials
           content:
             application/json:
               schema:
-                $ref: "./schemas/dtos/auth/LoginBadCredentialsResponse.json"
+                $ref: "./schemas/dtos/errors/BadRequestError.json"
