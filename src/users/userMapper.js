@@ -1,5 +1,4 @@
 const toUserResponse = (user) => {
-    console.log(user)
     return {
         id: user.id,
         name: user.name,

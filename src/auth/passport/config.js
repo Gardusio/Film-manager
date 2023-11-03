@@ -1,7 +1,7 @@
 
 import passport from 'passport';
 import LocalStrategy from 'passport-local'
-import { authenticateRequest } from '../authController.js';
+import { authenticateRequest } from '../authService.js';
 
 /*** Passport ***/
 

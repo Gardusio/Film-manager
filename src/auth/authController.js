@@ -1,24 +1,5 @@
 import passport from "passport";
-import bcrypt from "bcryptjs"
-import { getByEmail } from "../users/userService.js";
-import dotenv from "dotenv"
-import { BadCredentials } from "./errors/errors.js";
 import { toUserResponse } from "../users/userMapper.js";
-
-dotenv.config()
-
-
-const authenticateRequest = async (email, password, callback) => {
-    try {
-        const user = await getByEmail(email, password)
-
-        if (!user || !await bcrypt.compare(password, user.hash)) throw new BadCredentials();
-
-        return callback(null, user);
-    } catch (err) {
-        return callback(null, false, { message: err.message });
-    }
-}
 
 const doLogin = (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
@@ -43,4 +24,4 @@ const doLogout = (req, res) => {
     });
 }
 
-export { doLogin, doLogout, authenticateRequest }
+export { doLogin, doLogout }

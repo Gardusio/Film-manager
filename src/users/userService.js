@@ -1,10 +1,4 @@
 import { UserNotFound } from "./userErrors.js";
-import { findByEmail } from "./repository/userRepository.js";
-
-
-const getByEmail = async (email, password) => {
-    return await findByEmail(email, password)
-}
 
 const getById = async (id) => {
     const user = await findById(id)
