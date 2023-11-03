@@ -1,5 +1,5 @@
 import { db } from "../../../server.js";
-import { DBError } from "../../errors/dbErrors.js";
+import { DBError } from "../../utils/errors/dbErrors.js";
 import { selectByEmail, selectById } from "./queries.js";
 
 

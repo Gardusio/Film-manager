@@ -1,4 +1,4 @@
-import { UserNotFound } from "./errors/errors.js";
+import { UserNotFound } from "./userErrors.js";
 import { findByEmail } from "./repository/userRepository.js";
 
 

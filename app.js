@@ -5,9 +5,11 @@ import session from 'express-session';
 //import cors from 'cors';
 import { authenticate } from './src/auth/passport/config.js';
 import { authRouter } from './src/auth/authRouter.js';
-import userErrorHandler from './src/users/errors/userErrorHandler.js';
-import { validateRequest } from './src/validation/validator.js';
+import { userErrorHandler } from './src/users/userErrors.js';
+import { validateRequest } from './src/utils/validation/validator.js';
 import authErrorHandler from './src/auth/errors/authErrorHandler.js';
+import { filmRouter } from './src/films/filmRouter.js';
+import { dbErrorsHandler } from './src/utils/errors/dbErrors.js';
 
 dotenv.config()
 const port = process.env.PORT || 8080;
@@ -37,10 +39,12 @@ app.use(session({
 app.use(authenticate);
 
 app.use('/api/auth', authRouter);
+app.use('/api/films', filmRouter);
 
 app.use(validateRequest);
 
 app.use(userErrorHandler);
 app.use(authErrorHandler);
+app.use(dbErrorsHandler);
 
 export { app, port };
