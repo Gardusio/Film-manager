@@ -10,10 +10,8 @@ const findById = (id) => {
                 reject(new DBError(err.message));
             else if (row === undefined)
                 resolve(false);
-            else {
-                const user = { id: row.id, email: row.email, name: row.name, password: row.hash }
-                resolve(user);
-            }
+            else
+                resolve(row);
         });
     });
 };
@@ -21,15 +19,12 @@ const findById = (id) => {
 const findByEmail = (email) => {
     return new Promise((resolve, reject) => {
         db.get(selectByEmail, [email], (err, row) => {
-            if (err) {
+            if (err)
                 reject(new DBError());
-            } else if (row === undefined) {
+            else if (row === undefined)
                 resolve(false);
-            }
-            else {
-                const user = { id: row.id, email: row.email, name: row.name, password: row.hash };
-                resolve(user)
-            }
+            else
+                resolve(row)
         })
     });
 };

@@ -16,9 +16,18 @@
         "name": {
             "type": "string"
         },
-        "resource_location": {
-            "type": "string",
-            "format": "url"
+        "links": {
+            "type": "array",
+            "items": {
+                "properties": {
+                    "rel": {
+                        "type": "string"
+                    },
+                    "href": {
+                        "type": "string"
+                    }
+                }
+            }
         }
     }
 }

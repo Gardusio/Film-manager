@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs"
 import { getByEmail } from "../users/userService.js";
 import dotenv from "dotenv"
 import { BadCredentials } from "./errors/errors.js";
+import { toUserResponse } from "../users/userMapper.js";
 
 dotenv.config()
 
@@ -11,7 +12,7 @@ const authenticateRequest = async (email, password, callback) => {
     try {
         const user = await getByEmail(email, password)
 
-        if (!user || !await bcrypt.compare(password, user.password)) throw new BadCredentials();
+        if (!user || !await bcrypt.compare(password, user.hash)) throw new BadCredentials();
 
         return callback(null, user);
     } catch (err) {
@@ -31,13 +32,7 @@ const doLogin = (req, res, next) => {
             if (err)
                 return next(err);
 
-            const user = req.user
-            return res.json({
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                resource_location: process.env.BASE_URL + "/users/" + user.id
-            });
+            return res.json(toUserResponse(req.user));
         });
     })(req, res, next)
 }
