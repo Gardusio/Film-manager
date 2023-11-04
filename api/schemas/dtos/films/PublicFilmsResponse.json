@@ -8,18 +8,7 @@
         "films": {
             "type": "array",
             "items": {
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "format": "uuid"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "ownerId": {
-                        "type": "string"
-                    }
-                }
+                "$ref": "./PublicFilmResponse.json"
             }
         },
         "links": {

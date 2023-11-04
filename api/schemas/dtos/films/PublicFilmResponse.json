@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "film"
+    ],
+    "properties": {
+        "film": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "ownerId": {
+                    "type": "string"
+                }
+            }
+        },
+        "links": {
+            "$ref": "../links.json"
+        }
+    }
+}
