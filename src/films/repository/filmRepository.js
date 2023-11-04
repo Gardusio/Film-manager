@@ -1,7 +1,11 @@
 import { db } from "../../../server.js";
 import { DBError } from "../../utils/errors/dbErrors.js";
-import { pagedSelectAll, pagedSelectAllPublic, selectAll } from "./queryFactory.js";
+import { _selectById, pagedSelectAll, pagedSelectAllPublic, selectAll, selectAllPublic, selectById } from "./queryFactory.js";
 
+/**
+ *  TODO: CREATE A WRAPPER AROUND PROMISIFIED db.calls
+ * 
+*/
 const findAll = (pagination) => {
     const select = pagination ? pagedSelectAll(pagination) : selectAll
 
@@ -9,10 +13,8 @@ const findAll = (pagination) => {
         db.all(select, [], (err, rows) => {
             if (err)
                 reject(new DBError(err.message));
-            else {
-                console.log(rows.map(r => "db"))
+            else
                 resolve(rows);
-            }
         });
     });
 };
@@ -24,12 +26,23 @@ const findAllPublic = (pagination) => {
         db.all(select, [], (err, rows) => {
             if (err)
                 reject(new DBError(err.message));
-            else {
-                console.log(rows.map(r => "db"))
+            else
                 resolve(rows);
-            }
         });
     });
 };
 
-export { findAll, findAllPublic }
+
+const findById = (id) => {
+
+    return new Promise((resolve, reject) => {
+        db.get(_selectById, [id], (err, row) => {
+            if (err)
+                reject(new DBError(err.message));
+            else
+                resolve(row);
+        });
+    });
+}
+
+export { findById, findAll, findAllPublic }

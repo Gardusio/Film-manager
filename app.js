@@ -10,6 +10,7 @@ import { validateRequest } from './src/utils/validation/validator.js';
 import authErrorHandler from './src/auth/errors/authErrorHandler.js';
 import { filmRouter } from './src/films/filmRouter.js';
 import { dbErrorsHandler } from './src/utils/errors/dbErrors.js';
+import { filmErrorHandler } from './src/films/filmErrors.js';
 
 dotenv.config()
 const port = process.env.PORT || 8080;
@@ -38,13 +39,15 @@ app.use(session({
 
 app.use(authenticate);
 
+
+
 app.use('/api/auth', authRouter);
 app.use('/api/films', filmRouter);
 
 app.use(validateRequest);
-
 app.use(userErrorHandler);
 app.use(authErrorHandler);
 app.use(dbErrorsHandler);
+app.use(filmErrorHandler);
 
 export { app, port };

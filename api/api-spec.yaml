@@ -69,6 +69,7 @@ paths:
             application/json:
               schema:
                 $ref: "./schemas/dtos/films/PublicFilmsResponse.json"
+
   /films/public/{id}:
     get:
       summary: retrieve a paged list of public films
