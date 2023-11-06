@@ -20,19 +20,6 @@
         "private": {
             "type": "boolean",
             "default": true
-        },
-        "watchDate": {
-            "type": "string",
-            "format": "date"
-        },
-        "rating": {
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 0
-        },
-        "favorite": {
-            "type": "boolean",
-            "default": false
         }
     },
     "if": {

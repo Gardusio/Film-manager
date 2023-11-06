@@ -2,12 +2,14 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "object",
     "required": [
-        "id"
+        "id",
+        "email",
+        "password"
     ],
     "properties": {
         "id": {
-            "type": "string",
-            "format": "uuid"
+            "type": "integer",
+            "format": "int64"
         },
         "name": {
             "type": "string"
