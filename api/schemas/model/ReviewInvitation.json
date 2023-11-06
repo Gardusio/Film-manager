@@ -4,8 +4,7 @@
     "required": [
         "filmId",
         "reviewerId",
-        "rating",
-        "reviewDate"
+        "senderId"
     ],
     "properties": {
         "id": {
@@ -20,22 +19,20 @@
             "type": "integer",
             "format": "int64"
         },
-        "invitationId": {
+        "senderId": {
             "type": "integer",
             "format": "int64"
         },
-        "reviewDate": {
+        "message": {
             "type": "string",
+            "maxLength": 100
+        },
+        "issueDate": {
+            "type": "integer",
             "format": "date"
         },
-        "rating": {
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 0
-        },
-        "review": {
-            "type": "string",
-            "maxLength": 1000
+        "completed": {
+            "type": "boolean"
         }
     }
 }
