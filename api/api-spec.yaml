@@ -72,14 +72,15 @@ paths:
 
   /films/public/{id}:
     get:
-      summary: retrieve a paged list of public films
+      summary: retrieve the information of a public film with the given id
       tags:
         - films
       parameters:
         - in: path
           name: id
           schema:
-            type: "string"
+            type: "integer"
+            format: "int64"
           required: true
       responses:
         "200":
@@ -90,6 +91,61 @@ paths:
                 $ref: "./schemas/dtos/films/PublicFilmResponse.json"
         "404":
           description: No film with this id
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/errors/BaseError.json"
+
+  /reviews/{:filmId}:
+    get:
+      summary: retrieve a paged list of reviews for the given filmId
+      tags:
+        - reviews
+      parameters:
+        - in: path
+          name: filmId
+          schema:
+            type: "integer"
+            format: "int64"
+          required: true
+        - in: query
+          name: paging
+          schema:
+            $ref: "#/components/schemas/Paging"
+      responses:
+        "200":
+          description: Returns a page of reviews for the given filmId
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/reviews/ReviewsResponse.json"
+        "404":
+          description: No public film with this id
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/errors/BaseError.json"
+  /reviews/{id}:
+    get:
+      summary: retrieve the information of a specific review
+      tags:
+        - review
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: "integer"
+            format: "int64"
+          required: true
+      responses:
+        "200":
+          description: Returns the requested Review
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/reviews/ReviewResponse.json"
+        "404":
+          description: No review with this id
           content:
             application/json:
               schema:

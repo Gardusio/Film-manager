@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "filmId",
+        "reviewerId",
+        "reviewDate",
+        "rating"
+    ],
+    "properties": {
+        "id": {
+            "type": "integer",
+            "format": "int64"
+        },
+        "filmId": {
+            "type": "integer",
+            "format": "int64"
+        },
+        "reviewerId": {
+            "type": "integer",
+            "format": "int64"
+        },
+        "invitationId": {
+            "type": "integer",
+            "format": "int64"
+        },
+        "reviewDate": {
+            "type": "string",
+            "format": "date"
+        },
+        "rating": {
+            "type": "integer",
+            "maximum": 10,
+            "minimum": 0
+        },
+        "review": {
+            "type": "string",
+            "maxLength": 1000
+        }
+    }
+}
