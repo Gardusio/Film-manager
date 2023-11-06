@@ -10,6 +10,6 @@ In v1 the "sender" of a review invitation is always the owner of the film, so th
 
 Moreover, what about making possible to request a review for non-owned films? this seems to be a pretty obvious feature in future versions, and this can't be realized with the v1 Review schema, because it misses the "sender" informations. Including "senderId" in the review would again mix "Invitation" related concept with "Reviews", leading to complex api definitions for review endpoints, performance issues on complex queries involving invitations, and so on. 
 
-Instead, a more suitable approach would be to introduce "Invitation" as an entity containing all the informations needed: senderId, recipientId, filmId, completed/not-completed, and link Review with Invitation by an (optional*) "invitationId" field. In this way we also allow spontaneous reviews. Introducing this entity would make the Review.completed field redundant and in the end useless.
+Instead, a more suitable approach would be to introduce "Invitation" as an entity containing all the informations needed: senderId, recipientId, filmId, completed/not-completed, and link Review with Invitation by an (optional*) "invitationId" field. In this way we also allow spontaneous reviews. Introducing this entity would make the Review.completed field redundant, enabling to further simplifies the schemas (remove if-then-else validations, if a review exist, it's fields do not depend on each other).
 
 This will overall improve clarity, flexibility, scalability and maintainability.

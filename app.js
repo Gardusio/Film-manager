@@ -11,10 +11,11 @@ import authErrorHandler from './src/auth/errors/authErrorHandler.js';
 import { filmRouter } from './src/films/filmRouter.js';
 import { dbErrorsHandler } from './src/utils/errors/dbErrors.js';
 import { filmErrorHandler } from './src/films/filmErrors.js';
+import { reviewsRouter } from './src/reviews/reviewsRouter.js';
 
 dotenv.config()
-const port = process.env.PORT || 8080;
 
+const port = process.env.PORT || 8080;
 const app = express();
 
 
@@ -28,26 +29,27 @@ const corsOptions = {
 */
 
 app.use(express.json());
-
 app.use(morgan('dev'));
+
 
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
 }));
-
 app.use(authenticate);
-
 
 
 app.use('/api/auth', authRouter);
 app.use('/api/films', filmRouter);
+app.use('/api/reviews', reviewsRouter);
+
 
 app.use(validateRequest);
 app.use(userErrorHandler);
 app.use(authErrorHandler);
 app.use(dbErrorsHandler);
 app.use(filmErrorHandler);
+
 
 export { app, port };

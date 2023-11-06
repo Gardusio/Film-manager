@@ -8,10 +8,10 @@ const getPagination = (req, _, next) => {
     const pageNumber = parseInt(page);
     const pageSizeNumber = parseInt(pageSize);
 
-    const startIndex = (pageNumber - 1) * pageSize;
+    const startIndex = (pageNumber - 1) * pageSizeNumber;
 
     /**
-     * I find "next" and "prev" to somehow violate REST statelessness, so we don't include them in responses.
+     * I find "next" and "prev" to somehow violate REST statelessness, so i don't include them in response objects.
      * A client should on it's on decide what page to get next
      */
     // const endIndex = startIndex + pageSize;

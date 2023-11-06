@@ -1,6 +1,6 @@
 const selectAll = 'SELECT * FROM films';
 const selectAllPublic = 'SELECT * FROM films WHERE private = 0';
-const _selectById = "SELECT * FROM films WHERE id=?"
+
 const selectById = (id) => `SELECT * FROM films WHERE ${id}`;
 
 const pagedSelectAll = (pagination) => `SELECT * FROM films ORDER BY id LIMIT ${pagination.limit} OFFSET ${pagination.startIndex}`;
@@ -8,4 +8,4 @@ const pagedSelectAll = (pagination) => `SELECT * FROM films ORDER BY id LIMIT ${
 const pagedSelectAllPublic = (pagination) => `SELECT * FROM films WHERE private = 0 ORDER BY id LIMIT ${pagination.limit} OFFSET ${pagination.startIndex}`;
 
 
-export { selectAll, selectById, _selectById, selectAllPublic, pagedSelectAll, pagedSelectAllPublic }
+export { selectAll, selectById, selectAllPublic, pagedSelectAll, pagedSelectAllPublic }

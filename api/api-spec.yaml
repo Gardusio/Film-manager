@@ -125,14 +125,20 @@ paths:
             application/json:
               schema:
                 $ref: "./schemas/dtos/errors/BaseError.json"
-  /reviews/{id}:
+  /reviews/{:filmId}/{:reviewerId}:
     get:
-      summary: retrieve the information of a specific review
+      summary: retrieve the information of a specific review of a given film
       tags:
         - review
       parameters:
         - in: path
-          name: id
+          name: filmId
+          schema:
+            type: "integer"
+            format: "int64"
+          required: true
+        - in: path
+          name: reviewerId
           schema:
             type: "integer"
             format: "int64"
