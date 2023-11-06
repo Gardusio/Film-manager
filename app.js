@@ -9,7 +9,7 @@ import { userErrorHandler } from './src/users/userErrors.js';
 import { validateRequest } from './src/utils/validation/validator.js';
 import authErrorHandler from './src/auth/errors/authErrorHandler.js';
 import { filmRouter } from './src/films/filmRouter.js';
-import { dbErrorsHandler } from './src/utils/errors/dbErrors.js';
+import { dbErrorsHandler } from './src/utils/db/dbErrors.js';
 import { filmErrorHandler } from './src/films/filmErrors.js';
 import { reviewsRouter } from './src/reviews/reviewsRouter.js';
 

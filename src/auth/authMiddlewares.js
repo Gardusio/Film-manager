@@ -1,4 +1,4 @@
-const unauthorizedResponse = { message: 'Unauthorized' }
+const unauthorizedResponse = { message: 'Please login to access this resource' }
 
 const isLoggedIn = (req, res, next) => {
     if (req.isAuthenticated()) {

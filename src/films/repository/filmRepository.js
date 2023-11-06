@@ -1,48 +1,26 @@
-import { db } from "../../../server.js";
-import { DBError } from "../../utils/errors/dbErrors.js";
+import { dbAll, dbGet } from "../../utils/db/dbInterface.js";
 import { pagedSelectAll, pagedSelectAllPublic, selectAll, selectAllPublic, selectById } from "./queryFactory.js";
 
-/**
- *  TODO: CREATE A WRAPPER AROUND PROMISIFIED db.calls
- * 
-*/
-const findAll = (pagination) => {
-    const select = pagination ? pagedSelectAll(pagination) : selectAll
 
-    return new Promise((resolve, reject) => {
-        db.all(select, [], (err, rows) => {
-            if (err)
-                reject(new DBError(err.message));
-            else
-                resolve(rows);
-        });
-    });
+const findAll = (pagination) => {
+    const query = pagination ? pagedSelectAll(pagination) : selectAll
+
+    return dbAll(query)
 };
 
 const findAllPublic = (pagination) => {
-    const select = pagination ? pagedSelectAllPublic(pagination) : selectAllPublic
+    const query = pagination ? pagedSelectAllPublic(pagination) : selectAllPublic
 
-    return new Promise((resolve, reject) => {
-        db.all(select, [], (err, rows) => {
-            if (err)
-                reject(new DBError(err.message));
-            else
-                resolve(rows);
-        });
-    });
+    return dbAll(query)
 };
 
 
 const findById = (id) => {
+    const query = selectById(id);
 
-    return new Promise((resolve, reject) => {
-        db.get(selectById(id), (err, row) => {
-            if (err)
-                reject(new DBError(err.message));
-            else
-                resolve(row);
-        });
-    });
+    return dbGet(query);
 }
+
+
 
 export { findById, findAll, findAllPublic }

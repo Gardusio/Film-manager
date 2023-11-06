@@ -1,12 +1,12 @@
 import { toReviewResponse, toReviewsResponse } from "./reviewsMapper.js"
 import { getFilmReviews as getReviews } from "./reviewsService.js";
 import { getFilmReview as getReview } from "./reviewsService.js";
+import { getAllReviews as getAll } from "./reviewsService.js";
 
 const getAllReviews = async (req, res) => {
-    const filmId = req.params.filmId;
-    const reviews = await getReviews(req.pagination, filmId);
+    const reviews = await getAll(req.pagination);
 
-    const reviewsResponse = toReviewsResponse(reviews, filmId);
+    const reviewsResponse = toReviewsResponse(reviews);
 
     return res.status(200).json(reviewsResponse);
 }

@@ -1,5 +1,4 @@
-import { db } from "../../../server.js";
-import { DBError } from "../../utils/errors/dbErrors.js";
+import { dbAll, dbGet } from "../../utils/db/dbInterface.js";
 import { _selectByFilmId, pagedSelectAll, pagedSelectByFilmId, selectAll, selectByFilmId, selectById } from "./queryFactory.js";
 
 /**
@@ -7,41 +6,22 @@ import { _selectByFilmId, pagedSelectAll, pagedSelectByFilmId, selectAll, select
  * 
 */
 const findAll = (pagination) => {
-    const select = pagination ? pagedSelectAll(pagination) : selectAll
+    const query = pagination ? pagedSelectAll(pagination) : selectAll
 
-    return new Promise((resolve, reject) => {
-        db.all(select, [], (err, rows) => {
-            if (err)
-                reject(new DBError(err.message));
-            else
-                resolve(rows);
-        });
-    });
+    return dbAll(query);
 };
 
 const findByFilmId = (pagination, filmId) => {
-    const select = pagination ? pagedSelectByFilmId(pagination, filmId) : selectByFilmId(filmId)
+    const query = pagination ? pagedSelectByFilmId(pagination, filmId) : selectByFilmId(filmId)
 
-    return new Promise((resolve, reject) => {
-        db.all(select, (err, rows) => {
-            if (err)
-                reject(new DBError(err.message));
-            else
-                resolve(rows);
-        });
-    });
+    return dbAll(query);
 };
 
 
 const findById = (filmId, reviewerId) => {
-    return new Promise((resolve, reject) => {
-        db.get(selectById(filmId, reviewerId), (err, row) => {
-            if (err)
-                reject(new DBError(err.message));
-            else
-                resolve(row);
-        });
-    });
+    const query = selectById(filmId, reviewerId);
+
+    return dbGet(query);
 }
 
 export { findById, findByFilmId, findAll }
