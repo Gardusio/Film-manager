@@ -7,7 +7,7 @@ import { authenticate } from './src/auth/passport/config.js';
 import { authRouter } from './src/auth/authRouter.js';
 import { userErrorHandler } from './src/users/userErrors.js';
 import { validateRequest } from './src/utils/validation/validator.js';
-import authErrorHandler from './src/auth/errors/authErrorHandler.js';
+import { authErrorHandler } from './src/auth/authErrors.js';
 import { filmRouter } from './src/films/filmRouter.js';
 import { dbErrorsHandler } from './src/utils/db/dbErrors.js';
 import { filmErrorHandler } from './src/films/filmErrors.js';

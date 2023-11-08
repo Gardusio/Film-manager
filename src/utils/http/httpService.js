@@ -13,7 +13,11 @@ const unauthorized = (res, payload) => {
 }
 
 const notFound = (res, payload) => {
-    return res.status(404).json(payload)
+    return res.status(500).json(payload)
 }
 
-export { ok, badRequest, unauthorized, notFound }
+const serverError = (res, payload) => {
+    return res.status(500).json(payload)
+}
+
+export { ok, badRequest, unauthorized, notFound, serverError }

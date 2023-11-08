@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs"
-import { BadCredentials } from "./errors/errors.js";
+import { BadCredentials } from "./authErrors.js";
 import { findByEmail } from "../users/repository/userRepository.js";
 
 const authenticateRequest = async (email, password, callback) => {

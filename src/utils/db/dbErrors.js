@@ -1,3 +1,5 @@
+import { serverError } from "../http/httpService.js";
+
 class DBError extends Error {
     constructor(message) {
         super(message || "Query failed");
@@ -8,7 +10,7 @@ class DBError extends Error {
 const dbErrorsHandler = (err, _, res, next) => {
 
     if (err && err instanceof DBError) {
-        return res.status(500).send({ message: err.message })
+        return serverError({ message: err.message })
     }
     next(err)
 

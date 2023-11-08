@@ -1,3 +1,5 @@
+import { notFound } from "../utils/http/httpService.js";
+
 class UserNotFound extends Error {
     constructor(message) {
         super(message || "User not Found");
@@ -8,7 +10,7 @@ class UserNotFound extends Error {
 const userErrorHandler = (err, _, res, next) => {
 
     if (err && err instanceof UserNotFound) {
-        return res.status(404).send({ message: err.message })
+        return notFound(res, { message: err.message })
     }
     next(err)
 }
