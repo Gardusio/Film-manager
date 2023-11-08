@@ -9,7 +9,7 @@ const toUserResponse = (user) => {
         id: user.id,
         name: user.name,
         email: user.email,
-        links: mapToLinks("self", `${USERS_PATH}/${user.id}`)
+        links: mapToLinks(`${USERS_PATH} / ${user.id}`)
     }
 }
 

@@ -12,6 +12,7 @@ import { filmRouter } from './src/films/filmRouter.js';
 import { dbErrorsHandler } from './src/utils/db/dbErrors.js';
 import { filmErrorHandler } from './src/films/filmErrors.js';
 import { reviewsRouter } from './src/reviews/reviewsRouter.js';
+import { usersRouter } from './src/users/userRouter.js';
 
 dotenv.config()
 
@@ -41,6 +42,7 @@ app.use(authenticate);
 
 
 app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/films', filmRouter);
 app.use('/api/reviews', reviewsRouter);
 

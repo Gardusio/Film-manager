@@ -6,11 +6,11 @@ const REVIEWS_PATH = process.env.REVIEWS_PATH
 
 // TODO: Refactor static constant api paths
 const toReviewsResponse = (someReviews, filmId) => {
-    const href = filmId ? `${REVIEWS_PATH}/${filmId}` : REVIEWS_PATH // all existing reviews
+    const selfRef = filmId ? `${REVIEWS_PATH}/${filmId}` : REVIEWS_PATH // all existing reviews
 
     const reviewsResponse = {
         reviews: someReviews.map(review => toReviewResponse(review)),
-        links: mapToLinks("self", href)
+        links: mapToLinks(selfRef)
     }
 
     return reviewsResponse
@@ -19,7 +19,7 @@ const toReviewsResponse = (someReviews, filmId) => {
 const toReviewResponse = (aReview) => {
     return {
         review: { ...aReview },
-        links: mapToLinks("self", `${REVIEWS_PATH}/${aReview.filmId}/${aReview.reviewerId}`)
+        links: mapToLinks(`${REVIEWS_PATH}/${aReview.filmId}/${aReview.reviewerId}`)
     }
 }
 
