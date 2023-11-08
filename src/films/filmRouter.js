@@ -6,7 +6,7 @@ import { isLoggedIn } from "../auth/authMiddlewares.js";
 
 const filmRouter = Router();
 
-filmRouter.get("/public", getPagination, getPublicFilms)
+filmRouter.get("/public", getPagination, asyncHandle(getPublicFilms))
 filmRouter.get("/public/:id", asyncHandle(getPublicFilm))
 
 filmRouter.post("/", isLoggedIn, asyncHandle(() => console.log("eo")));

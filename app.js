@@ -41,10 +41,10 @@ app.use(session({
 app.use(authenticate);
 
 
-app.use('/api/auth', authRouter);
-app.use('/api/users', usersRouter);
-app.use('/api/films', filmRouter);
-app.use('/api/reviews', reviewsRouter);
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/films', filmRouter);
+app.use('/api/v1/reviews', reviewsRouter);
 
 
 app.use(validateRequest);
