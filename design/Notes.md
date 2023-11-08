@@ -13,3 +13,11 @@ Moreover, what about making possible to request a review for non-owned films? th
 Instead, a more suitable approach would be to introduce "Invitation" as an entity containing all the informations needed: senderId, recipientId, filmId, completed/not-completed, and link Review with Invitation by an (optional*) "invitationId" field. In this way we also allow spontaneous reviews. Introducing this entity would make the Review.completed field redundant, enabling to further simplifies the schemas (remove if-then-else validations, if a review exist, it's fields do not depend on each other).
 
 This will overall improve clarity, flexibility, scalability and maintainability.
+
+
+
+## About passing a "pagination" object down to the repository layer
+
+I asked myself the following question: "Is it a good choise to pass down an entire pagination object that comes from the request itself down to the repository? isn't it better to "open" that object and pass down only necessary fields?"
+
+I find the flexibility and extensibility that passing down the entire object is to be prefered, since in this version pagination is really simple and could be easily be extended in the feature. Potentially loosing a little bit of encapsulation seems good to me in this case.
