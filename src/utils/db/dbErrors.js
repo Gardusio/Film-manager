@@ -7,11 +7,11 @@ class DBError extends Error {
 
 const dbErrorsHandler = (err, _, res, next) => {
 
-    if (err instanceof DBError) {
+    if (err && err instanceof DBError) {
         return res.status(500).send({ message: err.message })
     }
-
     next(err)
+
 }
 
 export { DBError, dbErrorsHandler }

@@ -1,17 +1,15 @@
 
 import { Router } from "express"
 
-import { isLoggedIn } from "./authMiddlewares.js";
 import { validateLoginRequest } from "./authValidator.js";
 import { doLogin, doLogout } from "./authController.js";
+import { validateResponse } from "../utils/validation/validator.js";
 
 
 const authRouter = Router();
 
-authRouter.post("/login", validateLoginRequest, doLogin)
+authRouter.post("/login", validateLoginRequest, doLogin, validateResponse("user schema"))
 
 authRouter.delete('/logout', doLogout);
-
-//authRouter.post('/protected', isLoggedIn, protectedR);
 
 export { authRouter }

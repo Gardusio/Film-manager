@@ -7,10 +7,9 @@ class UserNotFound extends Error {
 
 const userErrorHandler = (err, _, res, next) => {
 
-    if (err instanceof UserNotFound) {
+    if (err && err instanceof UserNotFound) {
         return res.status(404).send({ message: err.message })
     }
-
     next(err)
 }
 

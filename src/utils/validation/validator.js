@@ -15,4 +15,15 @@ const validateRequest = (err, _, res, next) => {
     } else next(err);
 }
 
-export { validator, validateRequest }
+const validateResponse = (schema) => {
+    return async (req, res, next) => {
+        /* if responseObject !== validation schema then throw a ValidationError with status 500, log the missing fields*/
+        const response = res.response;
+
+        console.log("schema", schema)
+
+        return res.json(response)
+    }
+}
+
+export { validator, validateRequest, validateResponse }

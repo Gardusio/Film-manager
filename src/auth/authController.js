@@ -1,26 +1,28 @@
 import passport from "passport";
 import { toUserResponse } from "../users/userMapper.js";
+import { ok, unauthorized } from "../utils/http/httpService.js";
 
 const doLogin = (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
         if (err)
             return next(err);
         if (!user) {
-            return res.status(401).json(info);
+            return unauthorized(res, info);
         }
 
         req.login(user, (err) => {
             if (err)
                 return next(err);
 
-            return res.json(toUserResponse(req.user));
+            res = ok(res, toUserResponse(req.user));
+            next()
         });
     })(req, res, next)
 }
 
 const doLogout = (req, res) => {
     req.logout(() => {
-        res.status(200).json({ message: "Logged Out" });
+        ok(res, { message: "Logged Out" });
     });
 }
 

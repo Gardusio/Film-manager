@@ -1,34 +1,38 @@
+import { ok } from "../utils/http/httpService.js";
 import { toReviewResponse, toReviewsResponse } from "./reviewsMapper.js"
 import { getFilmReviews as getReviews } from "./reviewsService.js";
 import { getFilmReview as getReview } from "./reviewsService.js";
 import { getAllReviews as getAll } from "./reviewsService.js";
 
-const getAllReviews = async (req, res) => {
+const getAllReviews = async (req, res, next) => {
     const reviews = await getAll(req.pagination);
 
     const reviewsResponse = toReviewsResponse(reviews);
 
-    return res.status(200).json(reviewsResponse);
+    ok(res, reviewsResponse);
+    next()
 }
 
-const getFilmReviews = async (req, res) => {
+const getFilmReviews = async (req, res, next) => {
     const filmId = req.params.filmId;
     const reviews = await getReviews(req.pagination, filmId);
 
     const reviewsResponse = toReviewsResponse(reviews, filmId);
 
-    return res.status(200).json(reviewsResponse);
+    ok(res, reviewsResponse);
+    next()
 }
 
 
-const getFilmReview = async (req, res) => {
+const getFilmReview = async (req, res, next) => {
     const { filmId, reviewerId } = req.params;
 
     const review = await getReview(filmId, reviewerId);
 
     const reviewResponse = toReviewResponse(review);
 
-    return res.status(200).json(reviewResponse);
+    ok(res, reviewResponse);
+    next()
 }
 
 

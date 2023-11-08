@@ -7,10 +7,9 @@ class PublicFilmNotFound extends Error {
 
 const filmErrorHandler = (err, _, res, next) => {
 
-    if (err instanceof PublicFilmNotFound) {
-        res.status(404).json({ message: err.message })
+    if (err && err instanceof PublicFilmNotFound) {
+        return res.status(404).json({ message: err.message })
     }
-
     next(err)
 }
 
