@@ -34,9 +34,6 @@ node_modules/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variable files
-.env
-
 # vuepress v2.x temp and cache directory
 .temp
 .cache

@@ -1,10 +1,12 @@
 import { mapToLinks } from "../utils/hateos/linksMapper.js";
+import dotenv from 'dotenv'
 
-const BASE_URL = "/reviews/"
+dotenv.config()
+const REVIEWS_PATH = process.env.REVIEWS_PATH
 
 // TODO: Refactor static constant api paths
 const toReviewsResponse = (someReviews, filmId) => {
-    const href = filmId ? BASE_URL + filmId : BASE_URL // all existing reviews
+    const href = filmId ? `${REVIEWS_PATH}/${filmId}` : REVIEWS_PATH // all existing reviews
 
     const reviewsResponse = {
         reviews: someReviews.map(review => toReviewResponse(review)),
@@ -17,7 +19,7 @@ const toReviewsResponse = (someReviews, filmId) => {
 const toReviewResponse = (aReview) => {
     return {
         review: { ...aReview },
-        links: mapToLinks("self", BASE_URL + aReview.filmId + "/" + aReview.reviewerId)
+        links: mapToLinks("self", `${REVIEWS_PATH}/${aReview.filmId}/${aReview.reviewerId}`)
     }
 }
 

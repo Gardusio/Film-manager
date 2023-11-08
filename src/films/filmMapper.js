@@ -1,8 +1,12 @@
 import { mapToLinks } from "../utils/hateos/linksMapper.js";
+import dotenv from 'dotenv'
 
-// TODO: Refactor static constant api paths
+dotenv.config()
+const PUBLIC_FILMS_PATH = process.env.PUBLIC_FILMS_PATH
+const FILMS_PATH = process.env.FILMS_PUBLIC_PATH
+
 const toFilmsResponse = (someFilms, justPublic) => {
-    const href = justPublic ? "/films/public" : "/films";
+    const href = justPublic ? PUBLIC_FILMS_PATH : FILMS_PATH;
 
     const filmsResponse = {
         films: someFilms.map(film => toFilmResponse(film)),
@@ -13,7 +17,7 @@ const toFilmsResponse = (someFilms, justPublic) => {
 }
 
 const toFilmResponse = (aFilm) => {
-    const href = aFilm.private ? `/films/${aFilm.id}` : `/films/public/${aFilm.id}`
+    const href = aFilm.private ? `${FILMS_PATH}/${aFilm.id}` : `${PUBLIC_FILMS_PATH}/${aFilm.id}`
 
     return {
         film: {

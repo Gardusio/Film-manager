@@ -1,3 +1,4 @@
+import { findById } from "./repository/userRepository.js";
 import { UserNotFound } from "./userErrors.js";
 
 const getById = async (id) => {
@@ -8,4 +9,4 @@ const getById = async (id) => {
     return user;
 }
 
-export { getByEmail, getById }
+export { getById }
