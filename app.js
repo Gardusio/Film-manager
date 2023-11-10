@@ -6,13 +6,13 @@ import session from 'express-session';
 import { authenticate } from './src/auth/passport/config.js';
 import { authRouter } from './src/auth/authRouter.js';
 import { userErrorHandler } from './src/users/userErrors.js';
-import { validateRequest } from './src/utils/validation/validator.js';
 import { authErrorHandler } from './src/auth/authErrors.js';
 import { filmRouter } from './src/films/filmRouter.js';
 import { dbErrorsHandler } from './src/utils/db/dbErrors.js';
 import { filmErrorHandler } from './src/films/filmErrors.js';
 import { reviewsRouter } from './src/reviews/reviewsRouter.js';
 import { usersRouter } from './src/users/userRouter.js';
+import { requestValidationErrorHandler, responseValidationErrorHandler, validationErrorsHandler } from './src/utils/validation/validationErrors.js';
 
 dotenv.config()
 
@@ -46,8 +46,9 @@ app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/films', filmRouter);
 app.use('/api/v1/reviews', reviewsRouter);
 
-
-app.use(validateRequest);
+app.use(validationErrorsHandler);
+app.use(requestValidationErrorHandler);
+app.use(responseValidationErrorHandler);
 app.use(userErrorHandler);
 app.use(authErrorHandler);
 app.use(dbErrorsHandler);

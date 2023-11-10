@@ -21,3 +21,8 @@ This will overall improve clarity, flexibility, scalability and maintainability.
 I asked myself the following question: "Is it a good choise to pass down an entire pagination object that comes from the request itself down to the repository? isn't it better to "open" that object and pass down only necessary fields?"
 
 I find the flexibility and extensibility that passing down the entire object is to be prefered, since in this version pagination is really simple and could be easily be extended in the feature. Potentially loosing a little bit of encapsulation seems good to me in this case.
+
+
+
+## About types format and Ajv
+I simply don't care about formats :), i know ajv plugins exists to also manage format validation but for the purpose of this i've decided to skip that. 

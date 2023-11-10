@@ -18,7 +18,11 @@ const toReviewsResponse = (someReviews, filmId) => {
 
 const toReviewResponse = (aReview) => {
     return {
-        review: { ...aReview },
+        review: {
+            ...Object.fromEntries(
+                Object.entries(aReview).filter(([k, v]) => v != null)
+            )
+        },
         links: mapToLinks(`${REVIEWS_PATH}/${aReview.filmId}/${aReview.reviewerId}`)
     }
 }

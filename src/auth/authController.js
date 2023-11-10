@@ -4,17 +4,14 @@ import { ok, unauthorized } from "../utils/http/httpService.js";
 
 const doLogin = (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
-        if (err)
-            return next(err);
-        if (!user) {
-            return unauthorized(res, info);
-        }
+        if (err) return next(err);
+
+        if (!user) return unauthorized(res, info);
 
         req.login(user, (err) => {
-            if (err)
-                return next(err);
+            if (err) return next(err);
 
-            res = ok(res, toUserResponse(req.user));
+            ok(res, toUserResponse(req.user));
             next()
         });
     })(req, res, next)

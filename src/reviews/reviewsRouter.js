@@ -2,13 +2,15 @@ import { Router } from "express"
 import { asyncHandle } from "../utils/errors/asyncHandler.js";
 import { getPagination } from "../utils/pagination/paginationMiddleware.js";
 import { getAllReviews, getFilmReview, getFilmReviews } from "./reviewsController.js";
-import { validateResponse } from "../utils/validation/validator.js";
+import { validateReviewResponse, validateReviewsResponse } from "./reviewsValidator.js";
+
 
 const reviewsRouter = Router();
 
-reviewsRouter.get("/", getPagination, asyncHandle(getAllReviews), validateResponse("reviews schema"));
+reviewsRouter.get("/", getPagination, asyncHandle(getAllReviews), validateReviewsResponse);
 
-reviewsRouter.get("/:filmId", getPagination, asyncHandle(getFilmReviews), validateResponse("reviews schema"));
+reviewsRouter.get("/:filmId", getPagination, asyncHandle(getFilmReviews), validateReviewsResponse);
 
-reviewsRouter.get("/:filmId/:reviewerId", asyncHandle(getFilmReview), validateResponse("review schema"))
+reviewsRouter.get("/:filmId/:reviewerId", asyncHandle(getFilmReview), validateReviewResponse)
+
 export { reviewsRouter }

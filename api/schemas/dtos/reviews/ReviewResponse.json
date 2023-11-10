@@ -3,36 +3,39 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "object",
     "required": [
-        "filmId",
-        "reviewerId",
-        "reviewDate",
-        "rating"
+        "review"
     ],
     "properties": {
-        "id": {
-            "type": "integer"
-        },
-        "filmId": {
-            "type": "integer"
-        },
-        "reviewerId": {
-            "type": "integer"
-        },
-        "invitationId": {
-            "type": "integer"
-        },
-        "reviewDate": {
-            "type": "string",
-            "format": "date"
-        },
-        "rating": {
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 0
-        },
         "review": {
-            "type": "string",
-            "maxLength": 1000
+            "type": "object",
+            "required": [
+                "filmId",
+                "reviewerId",
+                "rating"
+            ],
+            "properties": {
+                "filmId": {
+                    "type": "integer"
+                },
+                "reviewerId": {
+                    "type": "integer"
+                },
+                "invitationId": {
+                    "type": "integer"
+                },
+                "reviewDate": {
+                    "type": "string"
+                },
+                "rating": {
+                    "type": "integer",
+                    "maximum": 10,
+                    "minimum": 0
+                },
+                "review": {
+                    "type": "string",
+                    "maxLength": 1000
+                }
+            }
         },
         "links": {
             "type": "array",

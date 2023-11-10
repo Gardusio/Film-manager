@@ -9,7 +9,7 @@ const getPublicFilms = async (req, res, next) => {
     const justPublic = true
     const filmsResponse = toFilmsResponse(films, justPublic);
 
-    res = ok(res, filmsResponse)
+    ok(res, filmsResponse)
     next()
 }
 
@@ -20,7 +20,7 @@ const getPublicFilm = async (req, res, next) => {
     const isPublic = true
     const filmResponse = toFilmResponse(film, isPublic);
 
-    res = ok(res, filmResponse)
+    ok(res, filmResponse)
     next()
 }
 

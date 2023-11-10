@@ -1,3 +1,4 @@
+import { getPublicById } from "../films/filmService.js";
 import { ok } from "../utils/http/httpService.js";
 import { toReviewResponse, toReviewsResponse } from "./reviewsMapper.js"
 import { getFilmReviews as getReviews } from "./reviewsService.js";
@@ -10,16 +11,21 @@ const getAllReviews = async (req, res, next) => {
     const reviewsResponse = toReviewsResponse(reviews);
 
     ok(res, reviewsResponse);
+    //res.send(reviewsResponse)
     next()
 }
 
 const getFilmReviews = async (req, res, next) => {
     const filmId = req.params.filmId;
-    const reviews = await getReviews(req.pagination, filmId);
+
+    const film = await getPublicById(filmId)
+
+    const reviews = await getReviews(req.pagination, film.id);
 
     const reviewsResponse = toReviewsResponse(reviews, filmId);
 
     ok(res, reviewsResponse);
+    //res.send(reviewsResponse)
     next()
 }
 
