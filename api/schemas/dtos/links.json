@@ -1,7 +1,9 @@
 {
+    "$id": "http://localhost:8080/api/schemas/dtos/links.json",
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "array",
     "items": {
+        "type": "object",
         "properties": {
             "rel": {
                 "type": "string"

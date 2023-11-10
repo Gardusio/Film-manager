@@ -1,26 +1,25 @@
 {
+    "$id": "http://localhost:8080/api/schemas/dtos/films/PublicFilmResponse.json",
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "object",
-    "required": [
-        "film"
-    ],
+    "required": [],
     "properties": {
         "film": {
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "integer"
                 },
                 "title": {
                     "type": "string"
                 },
                 "ownerId": {
-                    "type": "string"
+                    "type": "integer"
                 }
             }
         },
         "links": {
+            "type": "array",
             "$ref": "../links.json"
         }
     }

@@ -1,4 +1,5 @@
 {
+    "$id": "http://localhost:8080/api/schemas/dtos/users/UserResponse.json",
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "object",
     "required": [
@@ -16,6 +17,7 @@
             "type": "string"
         },
         "links": {
+            "type": "array",
             "$ref": "../links.json"
         }
     }
