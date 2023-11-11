@@ -22,4 +22,20 @@ const dbGet = (query, params) => {
     });
 }
 
-export { dbAll, dbGet }
+const dbInsert = (query, params) => {
+    return new Promise((resolve, reject) => {
+        console.log("query", query)
+        console.log("params", params)
+
+
+        db.run(query, params, function (err) {
+            if (err) {
+                reject(err.message);
+            } else {
+                resolve(this.lastID);
+            }
+        });
+    });
+}
+
+export { dbAll, dbGet, dbInsert }

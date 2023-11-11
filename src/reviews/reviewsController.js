@@ -6,12 +6,13 @@ import { getFilmReview as getReview } from "./reviewsService.js";
 import { getAllReviews as getAll } from "./reviewsService.js";
 
 const getAllReviews = async (req, res, next) => {
+    console.log("wtf")
     const reviews = await getAll(req.pagination);
 
     const reviewsResponse = toReviewsResponse(reviews);
 
     ok(res, reviewsResponse);
-    //res.send(reviewsResponse)
+
     next()
 }
 

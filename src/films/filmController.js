@@ -1,6 +1,6 @@
 import { ok } from "../utils/http/httpService.js";
 import { toFilmResponse, toFilmsResponse } from "./filmMapper.js";
-import { getAllPublic, getPublicById } from "./filmService.js"
+import { getAllPublic, getPublicById, createFilm, getPrivateById } from "./filmService.js"
 
 const getPublicFilms = async (req, res, next) => {
 
@@ -24,4 +24,25 @@ const getPublicFilm = async (req, res, next) => {
     next()
 }
 
-export { getPublicFilms, getPublicFilm }
+const getPrivateFilm = async (req, res, next) => {
+
+    const film = await getPrivateById(parseInt(req.params.id), req.user.id)
+
+    const isPublic = false
+    const filmResponse = toFilmResponse(film, isPublic);
+
+    ok(res, filmResponse)
+    next()
+}
+
+const createNewFilm = async (req, res, next) => {
+    const film = await createFilm(req.body, req.user.id)
+
+    const isPublic = !film.private
+    const filmResponse = toFilmResponse(film, isPublic);
+
+    ok(res, filmResponse)
+    next()
+}
+
+export { getPublicFilms, getPublicFilm, createNewFilm, getPrivateFilm }

@@ -34,9 +34,11 @@ const validationErrorsHandler = (err, _, res, next) => {
 const requestValidationErrorHandler = (err, req, res, next) => {
     console.log("Request validation failed for", req.url)
     if (err instanceof RequestValidationError) {
-        const errs = err.validationErrors.body.map(err => err.params)
 
-        badRequest(res, {
+        // This can be improved with more structured errors informations
+        const errs = err.validationErrors.body.map(err => err.message)
+
+        return badRequest(res, {
             message: "Request Validation Errors",
             errors: errs
         })

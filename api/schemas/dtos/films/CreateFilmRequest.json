@@ -1,0 +1,40 @@
+{
+    "$id": "http://localhost:8080/api/schemas/dtos/films/CreateFilmRequest.json",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "title",
+        "private"
+    ],
+    "properties": {
+        "private": {
+            "type": "boolean"
+        },
+        "title": {
+            "type": "string"
+        }
+    },
+    "if": {
+        "properties": {
+            "private": {
+                "const": true
+            }
+        }
+    },
+    "then": {
+        "properties": {
+            "favorite": {
+                "type": "boolean",
+                "default": false
+            },
+            "watchDate": {
+                "type": "string"
+            },
+            "rating": {
+                "type": "integer",
+                "maximum": 10,
+                "minimum": 0
+            }
+        }
+    }
+}

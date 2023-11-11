@@ -1,5 +1,5 @@
-import { dbAll, dbGet } from "../../utils/db/dbInterface.js";
-import { pagedSelectAll, pagedSelectAllPublic, selectAll, selectAllPublic, selectById } from "./queryFactory.js";
+import { dbAll, dbGet, dbInsert } from "../../utils/db/dbInterface.js";
+import { pagedSelectAll, pagedSelectAllPublic, selectAll, selectAllPublic, selectById, insert } from "./queryFactory.js";
 
 
 const findAll = (pagination) => {
@@ -21,6 +21,13 @@ const findById = (id) => {
     return dbGet(query);
 }
 
+const save = (film) => {
+    const params = Object.entries(film)
+    const query = insert(params)
+
+    return dbInsert(query, params.map(([k, v]) => v))
+}
 
 
-export { findById, findAll, findAllPublic }
+
+export { findById, findAll, findAllPublic, save }

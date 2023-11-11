@@ -1,5 +1,5 @@
 import { FilmNotFound } from "./filmErrors.js";
-import { findAll, findAllPublic, findById } from "./repository/filmRepository.js"
+import { findAll, findAllPublic, findById, save } from "./repository/filmRepository.js"
 
 const getAll = async (pagination) => {
     return await findAll(pagination);
@@ -12,7 +12,15 @@ const getAllPublic = async (pagination) => {
 const getPublicById = async (id) => {
     const film = await getById(id);
 
-    if (film.private) throw new FilmNotFound("No public film with this id");
+    if (film.private) throw new FilmNotFound();
+
+    return film
+}
+
+const getPrivateById = async (id, userId) => {
+    const film = await getById(id);
+
+    if (film.owner !== userId) throw new FilmNotFound();
 
     return film
 }
@@ -25,5 +33,14 @@ const getById = async (id) => {
     return film
 }
 
+const createFilm = async (film, userId) => {
+    const filmEntity = { ...film, owner: userId }
+    const filmId = await save(filmEntity)
 
-export { getAll, getAllPublic, getPublicById }
+    return {
+        id: filmId,
+        ...filmEntity
+    }
+}
+
+export { createFilm, getAll, getAllPublic, getPublicById, getPrivateById }

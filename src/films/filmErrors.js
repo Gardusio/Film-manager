@@ -1,6 +1,6 @@
 class FilmNotFound extends Error {
     constructor(message) {
-        super(message || "The film does not exist in the library");
+        super(message || "Film not found");
         this.name = "FilmNotFound";
     }
 }

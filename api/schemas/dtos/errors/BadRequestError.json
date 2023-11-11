@@ -11,11 +11,7 @@
         "errors": {
             "type": "array",
             "items": {
-                "properties": {
-                    "missingProperty": {
-                        "type": "string"
-                    }
-                }
+                "type": "string"
             }
         }
     }

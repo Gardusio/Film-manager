@@ -5,9 +5,7 @@ const ok = (res, response) => {
 }
 
 const badRequest = (res, payload) => {
-    res.response = payload
-    res.status = 400
-    return res;
+    return res.status(400).json(payload || { message: "Bad Request" })
 }
 
 const unauthorized = (res, payload) => {
@@ -16,7 +14,6 @@ const unauthorized = (res, payload) => {
 
 const notFound = (res, payload) => {
     return res.status(404).json(payload || { message: "Not found" })
-
 }
 
 const serverError = (res, payload) => {

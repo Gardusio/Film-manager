@@ -69,7 +69,6 @@ paths:
             application/json:
               schema:
                 $ref: "./schemas/dtos/films/PublicFilmsResponse.json"
-
   /films/public/{id}:
     get:
       summary: retrieve the information of a public film with the given id
@@ -95,6 +94,33 @@ paths:
             application/json:
               schema:
                 $ref: "./schemas/dtos/errors/BaseError.json"
+
+  /films:
+    post:
+      summary: Create a new film
+      tags:
+        - films
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./schemas/dtos/films/CreateFilmRequest.json"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "./schemas/dtos/films/PublicFilmResponse.json"
+                  - $ref: "./schemas/dtos/films/PrivateFilmResponse.json"
+        "400":
+          description: Request misses informations or some are invalid
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/errors/BadRequestError.json"
 
   /reviews/{:filmId}:
     get:

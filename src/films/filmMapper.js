@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 const PUBLIC_FILMS_PATH = process.env.PUBLIC_FILMS_PATH
-const FILMS_PATH = process.env.FILMS_PUBLIC_PATH
+const FILMS_PATH = process.env.FILMS_PATH
 const REVIEWS_PATH = process.env.REVIEWS_PATH
 
 
