@@ -1,0 +1,20 @@
+{
+    "$id": "http://localhost:8080/api/schemas/dtos/films/PrivateFilmsResponse.json",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "films"
+    ],
+    "properties": {
+        "films": {
+            "type": "array",
+            "items": {
+                "$ref": "./PrivateFilmResponse.json"
+            }
+        },
+        "links": {
+            "type": "array",
+            "$ref": "../links.json"
+        }
+    }
+}

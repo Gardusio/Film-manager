@@ -1,12 +1,23 @@
 import { ok } from "../utils/http/httpService.js";
-import { toFilmResponse, toFilmsResponse } from "./filmMapper.js";
-import { getAllPublic, getPublicById, createFilm, getPrivateById } from "./filmService.js"
+import { toFilmResponse, toFilmsResponse, toPrivateFilmResponse } from "./filmMapper.js";
+import { getAllPublic, getPublicById, createFilm, getPrivateById, getAllPrivate } from "./filmService.js"
 
 const getPublicFilms = async (req, res, next) => {
 
     const films = await getAllPublic(req.pagination);
 
     const justPublic = true
+    const filmsResponse = toFilmsResponse(films, justPublic);
+
+    ok(res, filmsResponse)
+    next()
+}
+
+const getPrivateFilms = async (req, res, next) => {
+
+    const films = await getAllPrivate(req.pagination, req.user.id) || { films: [] };
+
+    const justPublic = false
     const filmsResponse = toFilmsResponse(films, justPublic);
 
     ok(res, filmsResponse)
@@ -29,7 +40,7 @@ const getPrivateFilm = async (req, res, next) => {
     const film = await getPrivateById(parseInt(req.params.id), req.user.id)
 
     const isPublic = false
-    const filmResponse = toFilmResponse(film, isPublic);
+    const filmResponse = toPrivateFilmResponse(film, isPublic);
 
     ok(res, filmResponse)
     next()
@@ -45,4 +56,4 @@ const createNewFilm = async (req, res, next) => {
     next()
 }
 
-export { getPublicFilms, getPublicFilm, createNewFilm, getPrivateFilm }
+export { getPublicFilms, getPublicFilm, createNewFilm, getPrivateFilm, getPrivateFilms }

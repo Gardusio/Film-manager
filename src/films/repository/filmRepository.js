@@ -1,5 +1,5 @@
 import { dbAll, dbGet, dbInsert } from "../../utils/db/dbInterface.js";
-import { pagedSelectAll, pagedSelectAllPublic, selectAll, selectAllPublic, selectById, insert } from "./queryFactory.js";
+import { pagedSelectAll, pagedSelectAllPublic, selectAll, selectAllPublic, selectById, insert, pagedSelectAllPrivate, selectAllPrivate } from "./queryFactory.js";
 
 
 const findAll = (pagination) => {
@@ -10,6 +10,12 @@ const findAll = (pagination) => {
 
 const findAllPublic = (pagination) => {
     const query = pagination ? pagedSelectAllPublic(pagination) : selectAllPublic
+
+    return dbAll(query)
+};
+
+const findAllPrivate = (pagination, userId) => {
+    const query = pagination ? pagedSelectAllPrivate(pagination, userId) : selectAllPrivate(userId)
 
     return dbAll(query)
 };
@@ -30,4 +36,4 @@ const save = (film) => {
 
 
 
-export { findById, findAll, findAllPublic, save }
+export { findById, findAll, findAllPublic, save, findAllPrivate }

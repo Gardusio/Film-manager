@@ -28,8 +28,7 @@
                     "default": false
                 },
                 "watchDate": {
-                    "type": "string",
-                    "format": "date"
+                    "type": "string"
                 },
                 "rating": {
                     "type": "integer",

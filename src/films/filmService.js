@@ -1,5 +1,5 @@
 import { FilmNotFound } from "./filmErrors.js";
-import { findAll, findAllPublic, findById, save } from "./repository/filmRepository.js"
+import { findAll, findAllPrivate, findAllPublic, findById, save } from "./repository/filmRepository.js"
 
 const getAll = async (pagination) => {
     return await findAll(pagination);
@@ -7,6 +7,10 @@ const getAll = async (pagination) => {
 
 const getAllPublic = async (pagination) => {
     return await findAllPublic(pagination);
+}
+
+const getAllPrivate = async (pagination, userId) => {
+    return await findAllPrivate(pagination, userId);
 }
 
 const getPublicById = async (id) => {
@@ -43,4 +47,4 @@ const createFilm = async (film, userId) => {
     }
 }
 
-export { createFilm, getAll, getAllPublic, getPublicById, getPrivateById }
+export { createFilm, getAll, getAllPublic, getPublicById, getPrivateById, getAllPrivate }

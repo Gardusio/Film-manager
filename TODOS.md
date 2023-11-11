@@ -2,18 +2,14 @@
 
 - add a mapper for error responses
 
+- add validation mdw chain to other routers
+
 
 # Missing reqs
 
 - An authenticated user has access to the CRUD operations for the film elements:
-▪ The user can create a new film. If the creation of the film is successful, the service assigns it a unique identifier. The creator of the film becomes its owner. If the film is marked as public, a review invitation is not automatically assigned to its creator
-or any other user. The film review invitation to the users is explained later in this document.
 
-▪ The user can retrieve a single existing film, if one of the following conditions is
-satisfied:
-1) the film is marked as public;
-2) the user is the owner of the film.
-The user can also retrieve the list of all the films that she created, and the list of
+The user can also retrieve the list of
 all the films that she has been invited to review.
 ▪ The user can update an existing film, if she is the owner of the film. However, this
 operation does not allow changing its visibility from public to private (and vice

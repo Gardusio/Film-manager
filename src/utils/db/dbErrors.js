@@ -10,10 +10,11 @@ class DBError extends Error {
 const dbErrorsHandler = (err, _, res, next) => {
 
     if (err && err instanceof DBError) {
-        return serverError({ message: err.message })
+        console.log("Error executing a SQL query", err)
+        return serverError(res)
     }
-    next(err)
 
+    next(err)
 }
 
 export { DBError, dbErrorsHandler }

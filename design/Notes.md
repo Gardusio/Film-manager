@@ -26,3 +26,10 @@ I find the flexibility and extensibility that passing down the entire object is 
 
 ## About types format and Ajv
 I simply don't care about formats :), i know ajv plugins exists to also manage format validation but for the purpose of this i've decided to skip that. 
+
+
+
+## About having /films/public and /films/private (or just /films)
+I've some doubts on the design of this part of the films api. What is the purpose of having this separation?
+Getting a film is possible if : the (logged-in) user is the owner, the film is public
+why can't we just use /films/:{id} and perform the validation then? are you logged-in? are you the owner? is the film public? Why the client has to know, given a film id, wich route is the correct one to get the informations of that film?

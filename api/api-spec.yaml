@@ -39,6 +39,10 @@ paths:
             application/json:
               schema:
                 $ref: "./schemas/dtos/users/UserResponse.json"
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
         "401":
           description: Wrong credentials
           content:
@@ -95,8 +99,10 @@ paths:
               schema:
                 $ref: "./schemas/dtos/errors/BaseError.json"
 
-  /films:
+  /films/private:
     post:
+      security:
+        - cookieAuth: []
       summary: Create a new film
       tags:
         - films
@@ -121,6 +127,57 @@ paths:
             application/json:
               schema:
                 $ref: "./schemas/dtos/errors/BadRequestError.json"
+        "401":
+          description: User is not logged in
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/errors/BaseError.json"
+    get:
+      security:
+        - cookieAuth: []
+      summary: retrieve a paged list of owned films
+      tags:
+        - films
+      parameters:
+        - in: query
+          name: paging
+          schema:
+            $ref: "#/components/schemas/Paging"
+      responses:
+        "200":
+          description: Returns a page of owned films
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/films/PrivateFilmsResponse.json"
+
+  /films/private/{id}:
+    get:
+      security:
+        - cookieAuth: []
+      summary: retrieve a paged list of owned films
+      tags:
+        - films
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Returns an owned film
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/films/PrivateFilmResponse.json"
+        "404":
+          description: No owned film with this id
+          content:
+            application/json:
+              schema:
+                $ref: "./schemas/dtos/errors/BaseError.json"
 
   /reviews/{:filmId}:
     get:
@@ -192,3 +249,9 @@ components:
           type: integer
         limit:
           type: integer
+
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: connect.sid

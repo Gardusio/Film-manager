@@ -17,9 +17,7 @@ const notFound = (res, payload) => {
 }
 
 const serverError = (res, payload) => {
-    res.statusCode = 500
-    res.response = payload || { message: "Server has encountered an error" }
-    return res;
+    return res.status(500).json(payload || { message: "Server has encountered an error" })
 }
 
 export { ok, badRequest, unauthorized, notFound, serverError }

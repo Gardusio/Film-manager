@@ -46,12 +46,12 @@ app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/films', filmRouter);
 app.use('/api/v1/reviews', reviewsRouter);
 
+app.use(dbErrorsHandler);
 app.use(validationErrorsHandler);
 app.use(requestValidationErrorHandler);
 app.use(responseValidationErrorHandler);
 app.use(userErrorHandler);
 app.use(authErrorHandler);
-app.use(dbErrorsHandler);
 app.use(filmErrorHandler);
 
 

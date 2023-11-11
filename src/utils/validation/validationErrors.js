@@ -43,8 +43,7 @@ const requestValidationErrorHandler = (err, req, res, next) => {
             errors: errs
         })
     }
-
-    else next(err)
+    next(err)
 }
 
 const responseValidationErrorHandler = (err, req, res, next) => {
@@ -52,10 +51,10 @@ const responseValidationErrorHandler = (err, req, res, next) => {
 
         // more appropriate logging of the error/request id and so on..
         console.log("Error validating response object", err.validationErrors.response)
-
-        serverError(res)
+        res.statusCode = 500
+        return serverError(res)
     }
-    else next(err)
+    next(err)
 }
 
 export { RequestValidationError, ResponseValidationError, responseValidationErrorHandler, requestValidationErrorHandler, validationErrorsHandler }

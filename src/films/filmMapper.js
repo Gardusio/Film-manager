@@ -9,17 +9,21 @@ const REVIEWS_PATH = process.env.REVIEWS_PATH
 
 const toFilmsResponse = (someFilms, justPublic) => {
     const selfRef = justPublic ? PUBLIC_FILMS_PATH : FILMS_PATH;
+    const filmsData = justPublic ?
+        someFilms.map(film => toFilmResponse(film)) :
+        someFilms.map(film => toPrivateFilmResponse(film))
 
     const filmsResponse = {
-        films: someFilms.map(film => toFilmResponse(film)),
+        films: filmsData || [],
         links: mapToLinks(selfRef)
     }
 
     return filmsResponse
 }
 
+// HERE
 const toFilmResponse = (aFilm) => {
-    const selfRef = aFilm.private ? `${FILMS_PATH}/${aFilm.id}` : `${PUBLIC_FILMS_PATH}/${aFilm.id}`
+    const selfRef = `${PUBLIC_FILMS_PATH}/${aFilm.id}`
 
     return {
         film: {
@@ -31,5 +35,21 @@ const toFilmResponse = (aFilm) => {
     }
 }
 
+const toPrivateFilmResponse = (aFilm) => {
+    const selfRef = `${FILMS_PATH}/${aFilm.id}`
 
-export { toFilmResponse, toFilmsResponse }
+    return {
+        film: {
+            id: aFilm.id,
+            title: aFilm.title,
+            ownerId: aFilm.owner,
+            rating: aFilm.rating,
+            watchDate: aFilm.watchDate,
+            favorite: aFilm.favorite == 0 ? false : true
+        },
+        links: mapToLinks(selfRef, [{ rel: "reviews", href: `${REVIEWS_PATH}/${aFilm.id}` }])
+    }
+}
+
+
+export { toFilmResponse, toFilmsResponse, toPrivateFilmResponse }
